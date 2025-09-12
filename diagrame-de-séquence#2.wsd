@@ -1,0 +1,17 @@
+@startuml Retour
+actor Préposé
+control RentIT
+participant SAC
+participant InstitutionFinancière
+
+Préposé -> RentIT : Au départ, note km, essence, état véhicule et confirme paiement
+RentIT -> SAC : Vérifie paiement carte de crédit
+RentIT -> InstitutionFinancière : Vérifie paiement par débit
+SAC --> RentIT : Paiement accepté ou refusé
+InstitutionFinancière --> RentIT : Paiement accepté ou refusé
+RentIT --> Préposé : Confirmation ou refus paiement
+
+Préposé -> RentIT : Au retour, vérifie km, essence, état
+RentIT -> RentIT : Calcule les frais supplémentaires
+Préposé -> RentIT : Finalise transaction et clôture la location
+@enduml

@@ -1,0 +1,20 @@
+@startuml Réserver
+actor Membre
+boundary SiteWeb
+control RentIT
+participant SAC
+
+Membre -> SiteWeb : S'identifie ou s'inscrit
+SiteWeb -> RentIT : Vérifier âge et catégorie véhicule
+SiteWeb -> SAC : Vérifier crédit disponible (500$)
+SAC --> SiteWeb : Retourne approbation de crédit ou non
+RentIT --> SiteWeb : Retourne approbation de l'âge ou non
+Membre -> SiteWeb : Choisit succursale, date, heure
+SiteWeb -> RentIT : Cherche véhicules disponibles
+RentIT --> SiteWeb : Retourne liste véhicules
+SiteWeb -> SiteWeb : Affiche véhicules disponibles
+Membre -> SiteWeb : Confirme réservation
+SiteWeb -> RentIT : Réserve véhicule
+RentIT -> RentIT : Confirmation réservation
+RentIT --> Membre : Affiche confirmation de réservation
+@enduml
