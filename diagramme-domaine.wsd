@@ -1,0 +1,67 @@
+@startuml CanadianTire
+title Modèle du domaine - RentIT
+
+object Succursale {
+  code
+  adresse
+}
+
+object Membre {
+  nom
+  date_de_naissance
+  numéro_carte_crédit
+}
+
+object Voiture {
+  marque
+  modèle
+  numéro_de_série
+  catégorie
+  kilométrage
+  niveau_essence
+  état
+  disponibilité
+}
+
+object Inventaire {
+  stock
+}
+
+object Réservation {
+  date_début
+  date_retour
+  status
+  id_véhicule
+}
+
+object Paiement {
+  mode
+  authorisation?
+}
+
+object Contrat {
+  condition
+  paiement_effectué?
+  frais_supplémentaires
+  id_réservation
+  id_paiement
+}
+
+object Inspection {
+  type (départ | retour)
+  km
+  niveau_essence
+  photos
+}
+
+Membre "1" -- "1..*" Réservation : Peut créer
+Réservation "1" -- "1" Succursale : Est lié
+Réservation "1" -- "1" Voiture : Est lié
+(Succursale, Voiture) -- Inventaire : Stocke
+
+Réservation "1" -- "1" Contrat : Mène à
+Contrat "1" -- "1..*" Paiement : Donne lieu à
+
+Contrat "1" -- "2" Inspection : Encadre   ' départ + retour
+
+@enduml
