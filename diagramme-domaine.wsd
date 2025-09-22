@@ -1,4 +1,4 @@
-@startuml CanadianTire
+@startuml RentIT
 title Modèle du domaine - RentIT
 
 object Succursale {
