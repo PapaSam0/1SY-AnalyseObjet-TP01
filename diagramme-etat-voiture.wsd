@@ -1,0 +1,28 @@
+@startuml RentIT
+
+[*] --> EnService
+
+state EnService {
+  [*] --> Disponible
+
+  state Disponible
+  state Reservee
+  state Preparation
+  state EnLocation
+  state Retour
+
+  Disponible --> Reservee : reserver
+  Reservee --> Disponible : annuler / no_show
+  Reservee --> Preparation : arriver_client
+  Preparation --> EnLocation : remettre_vehicule
+  EnLocation --> Retour : retourner_vehicule
+  Retour --> Disponible : inspection_ok
+  Retour --> [*] : envoyer_maintenance
+}
+
+state Maintenance
+EnService --> Maintenance : envoyer_maintenance
+Maintenance --> EnService : entretien_termine
+
+@enduml
+
