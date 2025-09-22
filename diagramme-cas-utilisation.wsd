@@ -2,7 +2,6 @@
 left to right direction
 skinparam packageStyle rectangle
 
-' === Acteurs ===
 actor "Client (visiteur)" as Client
 actor "Membre" as Membre
 actor "Préposé" as Prepose
@@ -13,7 +12,7 @@ actor "Institution financière" as InstFin <<System>>
 ' Un membre est un client inscrit/authentifié
 Client <|-- Membre
 
-' === Système ===
+'
 rectangle "RentIT (Système de location)" {
 
   ' Parcours public (sans authentification)
@@ -23,7 +22,7 @@ rectangle "RentIT (Système de location)" {
   ' Authentification
   usecase "S'authentifier" as UC_Login
 
-  ' Réservation en ligne (cf. séquence « Réserver »)
+  ' Réservation en ligne 
   usecase "Réserver véhicule" as UC_Reserver
   usecase "Vérifier âge & catégorie\n(18/21/25)" as UC_Age
   usecase "Vérifier crédit dispo (500$)" as UC_Blocage
@@ -31,13 +30,13 @@ rectangle "RentIT (Système de location)" {
   usecase "Chercher véhicules disponibles" as UC_Dispo
   usecase "Confirmer réservation" as UC_Confirmer
 
-  ' Comptoir — Départ (cf. début de « Retour »)
+  ' Comptoir — Départ
   usecase "Prendre possession" as UC_Depart
   usecase "Préparer véhicule\n(km, essence, photos)" as UC_Preparer
   usecase "Percevoir paiement (cash/débit/crédit)" as UC_Payer
   usecase "Autoriser paiement" as UC_Autoriser
 
-  ' Comptoir — Retour (cf. fin de « Retour »)
+  ' Comptoir — Retour 
   usecase "Retourner véhicule" as UC_Retour
   usecase "Inspection retour\n(km/essence/état)" as UC_Inspecter
   usecase "Calculer frais supplémentaires" as UC_Frais
@@ -47,7 +46,7 @@ rectangle "RentIT (Système de location)" {
   usecase "Gérer inventaire & disponibilités" as UC_Inventaire
 }
 
-' === Associations acteur ↔ cas d’utilisation ===
+' Associations acteur cas d’utilisation
 Client --> UC_Consulter
 Client --> UC_Inscrire
 Membre --> UC_Reserver
@@ -61,8 +60,7 @@ Gerant --> UC_Inventaire
 SAC --> UC_Autoriser
 InstFin --> UC_Autoriser
 
-' === Relations entre cas d’utilisation ===
-' Réserver (inclut les étapes obligatoires selon la séquence « Réserver »)
+' Relations entre cas d’utilisation
 UC_Reserver --> UC_Login      : <<include>>   ' s’identifier (ou s’inscrire avant)
 UC_Reserver --> UC_Age        : <<include>>   ' règle 18/21/25 selon catégorie
 UC_Reserver --> UC_Blocage    : <<include>>   ' blocage 500$ via système externe
@@ -70,7 +68,7 @@ UC_Reserver --> UC_Choisir    : <<include>>
 UC_Reserver --> UC_Dispo      : <<include>>
 UC_Reserver --> UC_Confirmer  : <<include>>
 
-' Départ au comptoir (préparation + paiement autorisé)
+' Départ au comptoir
 UC_Depart --> UC_Preparer     : <<include>>
 UC_Depart --> UC_Payer        : <<include>>
 UC_Payer  --> UC_Autoriser    : <<include>>   ' SAC / Institution financière
