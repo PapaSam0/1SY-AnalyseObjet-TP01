@@ -16,5 +16,5 @@ SiteWeb -> SiteWeb : Affiche véhicules disponibles
 Membre -> SiteWeb : Confirme réservation
 SiteWeb -> RentIT : Réserve véhicule
 RentIT -> RentIT : Confirmation réservation
-RentIT --> Membre : Affiche confirmation de réservation
+RentIT --> SiteWeb : Affiche confirmation de réservation
 @enduml
