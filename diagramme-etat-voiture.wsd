@@ -12,7 +12,7 @@ state EnService {
   state Retour
 
   Disponible --> Reservee : reserver
-  Reservee --> Disponible : annuler / no_show
+  Reservee --> Disponible : annuler
   Reservee --> Preparation : arriver_client
   Preparation --> EnLocation : remettre_vehicule
   EnLocation --> Retour : retourner_vehicule
@@ -25,4 +25,3 @@ EnService --> Maintenance : envoyer_maintenance
 Maintenance --> EnService : entretien_termine
 
 @enduml
-
